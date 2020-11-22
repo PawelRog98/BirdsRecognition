@@ -1,0 +1,22 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<input id="hiddenValue" value=""/>
+<script>
+    function getPrediction() {
+        $.ajax({
+            url: '/Home/Upload',
+            method: "get",
+            dataType: 'json',
+            success: function (data) {
+                alert(data);
+                console.log(data);
+                var dataConverted = JSON.stringify(data);
+                //var prediction = $.parseJSON(data);
+                alert(dataConverted);
+                $("#hiddenValue").val(data);
+            }
+        })
+    }
+</script>
