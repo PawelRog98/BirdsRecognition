@@ -12,15 +12,18 @@ function ShowPreview(input) {
     }
 }
 
+function myParamName() {
+    return "files";
+}
     Dropzone.options.dropzoneForm = {
-        paramName: "files",
-        maxFilesize: 15,
+        paramName: myParamName,
+        maxFilesize: 25,
         maxFiles: 5,
         acceptedFiles: "image/*",
-        parallelUploads: 100,
+        parallelUploads: 5,
         dictMaxFilesExceeded: "Custom max files msg",
         timeout: 100000,
-        uploadMultiple: false,
+        uploadMultiple: true,
         autoProcessQueue: false,
         addRemoveLinks: true,
 
@@ -32,7 +35,6 @@ function ShowPreview(input) {
             button.addEventListener("click", function () {
                 myDropzone.processQueue();
             });
-
             this.on("queuecomplete", function () {
                 //var res = JSON.parse(data.xhr.responseText);
                 //getPrediction();
@@ -41,10 +43,36 @@ function ShowPreview(input) {
                 //$("@ViewBag.Result.Prediction").val()
                 
             });
-            this.on("success", function (file, response) {
+            //this.on("queuecomplete", function () {
+            //    this.on("success", function (file, response) {
+            //        var obj = jQuery.parseJSON(response)
+            //        console.log(obj);
+            //        $("#hiddenValue").val(obj.Prediction);
+            //    })
+            //    //$("#hiddenValue").val(obj.Prediction);
+            //    $('.dz-preview').remove();
+            //    this.removeAllFiles;
+            //});
+            //this.on("successmultiple", function (file, response) {
+            //    this.on("queuecomplete", function () {
+            //        var obj = jQuery.parseJSON(response)
+            //        console.log(obj);
+            //        $("#hiddenValue").val(obj.Prediction);
+            //    })
+            //    //$("#hiddenValue").val(obj.Prediction);
+            //    $('.dz-preview').remove();
+            //    this.removeAllFiles;
+            //});
+            this.on("successmultiple", function (file, response) {
                 var obj = jQuery.parseJSON(response)
                 console.log(obj);
-                $("#hiddenValue").val(obj.Prediction);
+                $.each(obj, function (i, item) {
+                    $("#hiddenValue").val(item.Prediction);
+                    console.log(item);
+                });
+                //$("#hiddenValue").val(obj.Prediction);
+                $('.dz-preview').remove();
+                this.removeAllFiles;
             })
         },
 

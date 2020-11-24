@@ -38,9 +38,9 @@ namespace PracaInzynierska.Controllers
 
                     modelInput.ImageSource = filePath;
 
-                    var imagePrediction = ConsumeModel.Predict(modelInput);
+                    //var imagePrediction = ConsumeModel.Predict(modelInput);
 
-                    ViewBag.Result = imagePrediction;
+                    //ViewBag.Result = imagePrediction;
 
                 }
             }
@@ -51,8 +51,11 @@ namespace PracaInzynierska.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Upload(List<IFormFile> files, ModelInput modelInput)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upload(ICollection<IFormFile> files, ModelInput modelInput)
         {
+            var PredictionList = new List<ModelOutput>();
+            ConsumeModel consumeModel = new ConsumeModel();
             var jsonFile="";
             //try
             //{
@@ -68,7 +71,7 @@ namespace PracaInzynierska.Controllers
 
                         modelInput.ImageSource = filePath;
 
-                        var imagePrediction = ConsumeModel.Predict(modelInput);
+                        var imagePrediction = consumeModel.Predict(modelInput);
 
                         ViewBag.Result = imagePrediction;
                     //var test = imagePrediction.Score.Max();
@@ -80,17 +83,18 @@ namespace PracaInzynierska.Controllers
                     //{
 
                     //}
-                    //ConfusionMatrix confusionMatrix = new ConfusionMatrix();
-                    jsonFile = JsonConvert.SerializeObject(imagePrediction);
+                    PredictionList.Add(new ModelOutput { Prediction = imagePrediction.Prediction, Score=imagePrediction.Score });
+
 
                     }
                 }
+            jsonFile = JsonConvert.SerializeObject(PredictionList);
             //}
             //catch (Exception)
             //{
             //    return Json(jsonFile);
             //}
-            
+
             return Json(jsonFile);
         }
         public IActionResult Privacy()

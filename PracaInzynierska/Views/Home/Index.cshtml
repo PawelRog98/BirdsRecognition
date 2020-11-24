@@ -9,10 +9,13 @@
         <div class="col-md-6 jumbotron">
             <img ID="impPrev" class="img-fluid rounded image" src="~/image/backgroundImage.png" />
             <form asp-action="Upload" asp-controller="Home" method="post" class="dropzone needsclick dz-clickable" id="dropzoneForm" enctype="multipart/form-data">
-                <input type="file" name="files" onchange="ShowPreview(this)" multiple/>
+                @*<input type="file" name="files[]" onchange="ShowPreview(this)" multiple/>*@
+                <div class="fallback">
+                    <input name="files" type="file" multiple />
+                </div>
                 @*<div class="jumbotron form-group" style="background-color: aqua;">
-                Dropzone
-            </div>*@
+            Dropzone
+        </div>*@
                 <button class="btn btn-sm btn-primary" type="submit">Rozpoznanie</button>
             </form>
             <button id="myButton" class="btn btn-sm btn-primary" type="submit">Rozpoznanie JS</button>
