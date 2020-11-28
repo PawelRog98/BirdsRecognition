@@ -51,10 +51,9 @@ namespace PracaInzynierska.Controllers
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upload(ICollection<IFormFile> files, ModelInput modelInput)
         {
-            var PredictionList = new List<ModelOutput>();
+            var PredictionList = new List<Result>();
             ConsumeModel consumeModel = new ConsumeModel();
             var jsonFile="";
             //try
@@ -64,16 +63,20 @@ namespace PracaInzynierska.Controllers
                     if (file != null && file.Length != 0)
                     {
                         var filePath = Path.GetTempFileName();
+                        byte[] imageArray = null;//System.IO.File.ReadAllBytes(filePath);
+                        //string imreBase64Data = Convert.ToBase64String(imageArray);
                         using (var image = new FileStream(filePath, FileMode.Create))
                         {
                             await file.CopyToAsync(image);
                         }
-
+                        imageArray = System.IO.File.ReadAllBytes(filePath);
                         modelInput.ImageSource = filePath;
-
+                        string imreBase64Data = Convert.ToBase64String(imageArray);
                         var imagePrediction = consumeModel.Predict(modelInput);
 
+                        var imgSrc = String.Format("data:image/png;base64,{0}", imreBase64Data);
                         ViewBag.Result = imagePrediction;
+                    
                     //var test = imagePrediction.Score.Max();
                     //if(imagePrediction.Score.Max()<0.75 && imagePrediction.Score.Max() > 0.5)
                     //{
@@ -83,7 +86,7 @@ namespace PracaInzynierska.Controllers
                     //{
 
                     //}
-                    PredictionList.Add(new ModelOutput { Prediction = imagePrediction.Prediction, Score=imagePrediction.Score });
+                    PredictionList.Add(new Result {Image=imgSrc, PredictionResult = imagePrediction.Prediction, Score=imagePrediction.Score.Max()*100 });
 
 
                     }

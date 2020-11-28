@@ -66,8 +66,14 @@ function myParamName() {
             this.on("successmultiple", function (file, response) {
                 var obj = jQuery.parseJSON(response)
                 console.log(obj);
+                $('#Table tbody').empty();
                 $.each(obj, function (i, item) {
-                    $("#hiddenValue").val(item.Prediction);
+                    $("tbody").append($("<tr>"));
+                    appendElement = $("tbody tr").last();
+                    appendElement.append($("<td>").html(obj[item.Prediction]));
+                    var rows = "<tr>" + "<td>" +'<img class="img-fluid rounded image" src="'+ item.Image +'">'+ "</td>" + "<td>" + item.PredictionResult + "</td>" + "<td>" + item.Score + "</td>" + "</tr>";
+                    //$("#hiddenValue").val(item.Prediction);
+                    $('#Table tbody').append(rows);
                     console.log(item);
                 });
                 //$("#hiddenValue").val(obj.Prediction);

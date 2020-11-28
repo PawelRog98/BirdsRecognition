@@ -5,9 +5,8 @@
 <link rel="stylesheet" href="~/lib/dropzone/dropzone.css" />
 <script src="~/lib/dropzone/dropzone.js"></script>
 <div class="text-center">
-    <div class="row">
-        <div class="col-md-6 jumbotron">
-            <img ID="impPrev" class="img-fluid rounded image" src="~/image/backgroundImage.png" />
+        <div class="col-md-12 jumbotron">
+            @*<img ID="impPrev" class="img-fluid rounded image" src="~/image/backgroundImage.png" />*@
             <form asp-action="Upload" asp-controller="Home" method="post" class="dropzone needsclick dz-clickable" id="dropzoneForm" enctype="multipart/form-data">
                 @*<input type="file" name="files[]" onchange="ShowPreview(this)" multiple/>*@
                 <div class="fallback">
@@ -16,11 +15,11 @@
                 @*<div class="jumbotron form-group" style="background-color: aqua;">
             Dropzone
         </div>*@
-                <button class="btn btn-sm btn-primary" type="submit">Rozpoznanie</button>
+                @*<button class="btn btn-sm btn-primary" type="submit">Rozpoznanie</button>*@
             </form>
-            <button id="myButton" class="btn btn-sm btn-primary" type="submit">Rozpoznanie JS</button>
+            <button id="myButton" class="btn btn-sm btn-primary" type="submit">Recognize</button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
             @*<script>
                 $(document).on('change', function () {  
                @if (ViewBag.Result != null)
@@ -44,7 +43,6 @@
                 console.log("jest" + test);
             }
         </script>*@
-    </div>
 </div>
 @*<div class="row">
 
