@@ -74,3 +74,15 @@ body {
     height:300px;
     width:300px;
 }
+td{
+    padding:25px;
+}
+.Prediction {
+    border: 2px solid;
+    border-radius: 10px;
+    box-shadow: 4px 4px 30px 4px rgba(153,151,153,0.9);
+}
+.jumbotroneMain {
+    border-radius: 10px;
+    box-shadow: 4px 4px 30px 4px rgba(153,151,153,0.9);
+}

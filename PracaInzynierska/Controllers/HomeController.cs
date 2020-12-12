@@ -24,30 +24,8 @@ namespace PracaInzynierska.Controllers
         {
             _logger = logger;
         }
-        public async Task<IActionResult> Index(IFormFile image, ModelInput modelInput) 
+        public IActionResult Index() 
         {
-            try
-            {
-                if (image != null && image.Length != 0)
-                {
-                    var filePath = Path.GetTempFileName();
-                    using (var file = new FileStream(filePath, FileMode.Create))
-                    {
-                        await image.CopyToAsync(file);
-                    }
-
-                    modelInput.ImageSource = filePath;
-
-                    //var imagePrediction = ConsumeModel.Predict(modelInput);
-
-                    //ViewBag.Result = imagePrediction;
-
-                }
-            }
-            catch(Exception)
-            {
-                return NotFound();
-            }
             return View();
         }
         [HttpPost]
@@ -63,8 +41,7 @@ namespace PracaInzynierska.Controllers
                     if (file != null && file.Length != 0)
                     {
                         var filePath = Path.GetTempFileName();
-                        byte[] imageArray = null;//System.IO.File.ReadAllBytes(filePath);
-                        //string imreBase64Data = Convert.ToBase64String(imageArray);
+                        byte[] imageArray = null;
                         using (var image = new FileStream(filePath, FileMode.Create))
                         {
                             await file.CopyToAsync(image);
@@ -77,21 +54,13 @@ namespace PracaInzynierska.Controllers
                         var imgSrc = String.Format("data:image/png;base64,{0}", imreBase64Data);
                         ViewBag.Result = imagePrediction;
                     
-                    //var test = imagePrediction.Score.Max();
-                    //if(imagePrediction.Score.Max()<0.75 && imagePrediction.Score.Max() > 0.5)
-                    //{
-
-                    //}
-                    //else if(imagePrediction.Score.Max() < 0.5)
-                    //{
-
-                    //}
-                    PredictionList.Add(new Result {Image=imgSrc, PredictionResult = imagePrediction.Prediction, Score=imagePrediction.Score.Max()*100 });
+                        PredictionList.Add(new Result {Image=imgSrc, PredictionResult = imagePrediction.Prediction, Score=imagePrediction.Score.Max()*100 });
 
 
                     }
                 }
             jsonFile = JsonConvert.SerializeObject(PredictionList);
+            //HttpContext.Session.SetString(jsonFile,);
             //}
             //catch (Exception)
             //{
@@ -102,8 +71,6 @@ namespace PracaInzynierska.Controllers
         }
         public IActionResult Privacy()
         {
-            var mlContext = new MLContext(seed: 1);
-
             return View();
         }
 

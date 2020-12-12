@@ -4,78 +4,17 @@
 <link rel="stylesheet" href="~/lib/dropzone/basic.css" />
 <link rel="stylesheet" href="~/lib/dropzone/dropzone.css" />
 <script src="~/lib/dropzone/dropzone.js"></script>
-<div class="text-center">
+<div class="text-center col-12">
         <div class="col-md-12 jumbotron">
-            @*<img ID="impPrev" class="img-fluid rounded image" src="~/image/backgroundImage.png" />*@
             <form asp-action="Upload" asp-controller="Home" method="post" class="dropzone needsclick dz-clickable" id="dropzoneForm" enctype="multipart/form-data">
-                @*<input type="file" name="files[]" onchange="ShowPreview(this)" multiple/>*@
                 <div class="fallback">
                     <input name="files" type="file" multiple />
                 </div>
-                @*<div class="jumbotron form-group" style="background-color: aqua;">
-            Dropzone
-        </div>*@
-                @*<button class="btn btn-sm btn-primary" type="submit">Rozpoznanie</button>*@
             </form>
             <button id="myButton" class="btn btn-sm btn-primary" type="submit">Recognize</button>
         </div>
-        <div class="col-md-12">
-            @*<script>
-                $(document).on('change', function () {  
-               @if (ViewBag.Result != null)
-                {
-                    <a>Wynik @ViewBag.Result.Prediction</a>
-                }
-                });*@
-            @*@if (ViewBag.Result != null)
-            {
-                <a id="hiddenValue">Wynik @ViewBag.Result.Prediction</a>
-            }*@
-            @*</script>*@
+        <div class="d-flex justify-content-center">
             <partial name="_PredictionPartialView" />
         </div>
-        @*<script>
-            var test = '@ViewBag.Result'
-            if (test.length == 0) {
-                console.log("brak");
-            }
-            else {
-                console.log("jest" + test);
-            }
-        </script>*@
 </div>
-@*<div class="row">
-
-    <div class="col-md-9">
-
-        <div id="dropzone">
-
-            <form action="/Home/Upload" class="dropzone needsclick dz-clickable" id="uploader">
-
-                <div class="dz-message needsclick">
-
-                    Drop files here or click to upload.<br>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</div>*@
-@*<script>
-    $(function () {
-        Dropzone.options.dropzoneForm = {
-            paramName: "image", // The name that will be used to transfer the file
-            autoProcessQueue: false,
-            uploadMultiple: true,
-            parallelUploads: 100,
-            accept: function (file, done) {
-                done();
-            }
-        };
-    });
-</script>*@
 
