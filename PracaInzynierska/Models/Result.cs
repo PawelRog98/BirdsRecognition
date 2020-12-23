@@ -10,5 +10,6 @@ namespace PracaInzynierska.Models
         public string Image { get; set; }
         public string PredictionResult { get; set; }
         public float Score { get; set; }
+        public string Label { get; set; }
     }
 }

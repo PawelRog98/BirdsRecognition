@@ -6,6 +6,9 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
+.navbar-color {
+    background-color: #fffbc4 !important;
+}
 
 /* Provide sufficient contrast against white background */
 a {
@@ -79,10 +82,36 @@ td{
 }
 .Prediction {
     border: 2px solid;
+    border-color: #c4b970;
+    box-shadow: 4px 4px 30px 4px rgba(153,151,153,0.9);
+    background-color: #fffbc4;
+}
+.jumbotron {
     border-radius: 10px;
+    background-color: #e0dfd1 !important;
     box-shadow: 4px 4px 30px 4px rgba(153,151,153,0.9);
 }
-.jumbotroneMain {
+.recognizeButton {
+    height: 100px !important;
+    width: 300px !important;
+    font-size: 24px !important;
+    background-color: #fffbc4;
+    border: 2px solid;
     border-radius: 10px;
+    border-color: #c4b970;
     box-shadow: 4px 4px 30px 4px rgba(153,151,153,0.9);
 }
+    .recognizeButton:hover {
+        background-color: #c4b970;
+        border-color: #e0dcbc;
+    }
+.recognizeButton:active {
+    position: relative;
+    top: 1px;
+}
+.noBird {
+    font-size: 24px !important;
+    color: red !important;
+}
+
+

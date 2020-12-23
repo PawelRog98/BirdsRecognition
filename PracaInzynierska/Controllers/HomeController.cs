@@ -34,42 +34,57 @@ namespace PracaInzynierska.Controllers
             var PredictionList = new List<Result>();
             ConsumeModel consumeModel = new ConsumeModel();
             var jsonFile="";
-            //try
-            //{
+            try
+            {
                 foreach(var file in files)
                 {
                     if (file != null && file.Length != 0)
                     {
                         var filePath = Path.GetTempFileName();
-                        byte[] imageArray = null;
                         using (var image = new FileStream(filePath, FileMode.Create))
                         {
                             await file.CopyToAsync(image);
                         }
-                        imageArray = System.IO.File.ReadAllBytes(filePath);
+
+
+                        byte[] imageArray = System.IO.File.ReadAllBytes(filePath);
+                        string base64Data = Convert.ToBase64String(imageArray);
+                        var imageSource = String.Format("data:image/png;base64,{0}", base64Data);
+
+
                         modelInput.ImageSource = filePath;
-                        string imreBase64Data = Convert.ToBase64String(imageArray);
                         var imagePrediction = consumeModel.Predict(modelInput);
 
-                        var imgSrc = String.Format("data:image/png;base64,{0}", imreBase64Data);
-                        ViewBag.Result = imagePrediction;
-                    
-                        PredictionList.Add(new Result {Image=imgSrc, PredictionResult = imagePrediction.Prediction, Score=imagePrediction.Score.Max()*100 });
 
-
+                        string label="";
+                        if((imagePrediction.Score.Max()*100)>=85)
+                        {
+                            label = "I have recognized the bird. It is:";
+                        }
+                        else if(((imagePrediction.Score.Max() * 100) < 85) && ((imagePrediction.Score.Max()*100)>50))
+                        {
+                            label = "I have recognized the bird. I think it is:";
+                        }
+                        PredictionList.Add(new Result {Image = imageSource, 
+                                                       PredictionResult = imagePrediction.Prediction, 
+                                                       Score=imagePrediction.Score.Max()*100,
+                                                       Label = label });
                     }
                 }
             jsonFile = JsonConvert.SerializeObject(PredictionList);
-            //HttpContext.Session.SetString(jsonFile,);
-            //}
-            //catch (Exception)
-            //{
-            //    return Json(jsonFile);
-            //}
+            }
+            catch (Exception)
+            {
+                return Json("Error, try again");
+            }
 
             return Json(jsonFile);
         }
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult About()
         {
             return View();
         }

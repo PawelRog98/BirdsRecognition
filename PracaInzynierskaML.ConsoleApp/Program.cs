@@ -71,9 +71,9 @@ namespace PracaInzynierskaML.ConsoleApp
 
 
             DataViewSchema modelSchema;
-            //ITransformer trainedModel = mlContext.Model.Load(@"E:\INZYNIERKA\PracaInzynierska\PracaInzynierskaML.Model\MLModel.zip", out modelSchema);
+            ITransformer trainedModel = mlContext.Model.Load(@"E:\INZYNIERKA\PracaInzynierska\PracaInzynierskaML.Model\MLModel.zip", out modelSchema);
             //ITransformer trainedModel = mlContext.Model.Load(@"E:\INZYNIERKA\modelInceptionV3\MLModelInception.zip", out modelSchema);
-            ITransformer trainedModel = mlContext.Model.Load(@"E:\INZYNIERKA\modelInceptionV3_2\MLModelInceptionV3.zip", out modelSchema);
+            //ITransformer trainedModel = mlContext.Model.Load(@"E:\INZYNIERKA\modelInceptionV3_2\MLModelInceptionV3.zip", out modelSchema);
             // Make a single prediction on the sample data and print results
             //var predictionResult = ConsumeModel.Predict(images);
 
@@ -83,7 +83,7 @@ namespace PracaInzynierskaML.ConsoleApp
             Console.WriteLine("Using model to make single prediction -- Comparing actual Label with predicted Label from sample data...\n\n");
             //Console.WriteLine($"ImageSource: {sampleData.ImageSource}");
             //Console.WriteLine($"\n\nActual Label: {sampleData.Label} \nPredicted Label value {predictionResult.Prediction} \nPredicted Label scores: [{String.Join(",", predictionResult.Score)}]\n\n");
-            Console.WriteLine(metrics.ConfusionMatrix.GetFormattedConfusionTable());
+            //Console.WriteLine(metrics.ConfusionMatrix.GetFormattedConfusionTable());
             Console.WriteLine(metrics.MicroAccuracy);
             Console.WriteLine(metrics.MacroAccuracy);
             //Console.WriteLine("=============== Train new model ===============");
