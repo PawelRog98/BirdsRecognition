@@ -4,8 +4,22 @@
 <link rel="stylesheet" href="~/lib/dropzone/basic.css" />
 <link rel="stylesheet" href="~/lib/dropzone/dropzone.css" />
 <script src="~/lib/dropzone/dropzone.js"></script>
-<div class="text-center col-12">
-        <div class="col-md-12 jumbotron">
+<div class="col-12">
+        <div class="jumbotron">
+            <div class="centered">
+                <h3 class="text-center">INSTRCUTION</h3><br />
+                <div class="divMargin">
+                    <span>1.</span> Drop your files into a white rectangle
+                </div>
+                <div class="divMargin">
+                    <span>2.</span> Click on "Recognize" button
+                </div>
+                <div class="divMargin">
+                    <span>3.</span> Wait and see your results
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 jumbotron text-center">
             <form asp-action="Upload" asp-controller="Home" method="post" class="dropzone needsclick dz-clickable" id="dropzoneForm" enctype="multipart/form-data">
                 <div class="fallback">
                     <input name="files" type="file" multiple />

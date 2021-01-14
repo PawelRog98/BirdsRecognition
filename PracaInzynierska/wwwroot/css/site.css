@@ -113,5 +113,22 @@ td{
     font-size: 24px !important;
     color: red !important;
 }
-
-
+.divMargin{
+    margin-bottom:8px;
+}
+div span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border: 2px solid;
+    border-color: #c4b970;
+    border-radius: 10px;
+    background-color: #fffbc4;
+    color: black;
+}
+.centered{ 
+    margin-left:35%;
+    margin-right:35%;
+}

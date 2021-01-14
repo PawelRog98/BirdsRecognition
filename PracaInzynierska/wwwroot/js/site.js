@@ -54,4 +54,3 @@ Dropzone.options.dropzoneForm = {
         },
 
 };
-
